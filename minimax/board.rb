@@ -9,6 +9,10 @@ class Board
     @spaces.select { |x| x.is_a? Fixnum }
   end
 
+  def legal_move?(move)
+    self.legal_moves.include?(move)
+  end
+
   def move!(space, player)
     @spaces[space - 1] = player.character
   end

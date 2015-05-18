@@ -15,7 +15,7 @@ class TicTacToe
   end
 
   def play
-    puts "\nWelcome to Tic-Tac-Toe!"
+    puts "\nWelcome to Tic-Tac-Toe!\n\n"
     current_player = @player1
     until self.finished?
       self.turn(current_player)
@@ -28,14 +28,23 @@ class TicTacToe
     player == @player1 ? @player2 : @player1
   end
 
+  def get_legal_move(player)
+    move = player.get_move(@board)
+    until @board.legal_move?(move)
+      puts "I'm sorry. #{move} is not a valid space. Please choose again.\n"
+      move = player.get_move(@board)
+    end
+    move
+  end
+
   def turn(player)
     puts @board
     puts
     puts "#{player.name}'s turn! Pick a square ..."
     puts
 
-    move = player.get_move(@board)
-    puts "#{player.name} chose #{move} ..."
+    move = self.get_legal_move(player)
+    puts "\n#{player.name} chose #{move} ..."
     puts
     @board.move!(move, player)
   end
@@ -44,7 +53,7 @@ class TicTacToe
     if @board.winner?
       # We're passed the player who would've gone next. Last turn's player won.
       last_player = next_player(player)
-      puts "\nPlayer #{last_player.name} wins!\n"
+      puts "\n#{last_player.name} wins!\n"
     else
       puts "It's a draw!"
     end

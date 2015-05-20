@@ -64,11 +64,13 @@ class BoardTest < MiniTest::Test
   end
 
   def test_boards_can_determine_illegal_moves
+    assert @board.legal_move?(5)
     place_moves(5)
     refute @board.legal_move?(5)
   end
 
   def test_boards_can_list_available_moves
+    assert_equal @board.legal_moves, (1..9).to_a
     place_moves(1, 3, 5, 7, 9)
     assert_equal @board.legal_moves, [2, 4, 6, 8]
   end

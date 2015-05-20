@@ -10,14 +10,10 @@ class TicTacToe
     @board = Board.new(size)
   end
 
-  def finished?
-    @board.full? || @board.win?
-  end
-
   def play
     puts "\nWelcome to Tic-Tac-Toe!\n\n"
     current_player = @player1
-    until self.finished?
+    until @board.game_over?
       self.turn(current_player)
       current_player = next_player(current_player)
     end

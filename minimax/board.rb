@@ -17,6 +17,10 @@ class Board
     @spaces[space - 1] = player.character
   end
 
+  def game_over?
+    self.full? || self.win?
+  end
+
   def full?
     @spaces.all? { |x| x.is_a? String }
   end
@@ -31,6 +35,10 @@ class Board
     @wins.any? do |indexes|
       indexes.all? { |x| @spaces[x] == player.character }
     end
+  end
+
+  def score(player)
+    self.winner?(player) ? 10 : 0
   end
 
   def to_s

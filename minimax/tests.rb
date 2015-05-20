@@ -47,20 +47,26 @@ class BoardTest < MiniTest::Test
 
   def test_boards_recognize_row_wins
     refute @board.win?
+    refute @board.game_over?
     place_moves(1, 2, 3)
     assert @board.win?
+    assert @board.game_over?
   end
 
   def test_boards_recognize_col_wins
     refute @board.win?
+    refute @board.game_over?
     place_moves(1, 4, 7)
     assert @board.win?
+    assert @board.game_over?
   end
 
   def test_boards_recognize_diag_wins
     refute @board.win?
+    refute @board.game_over?
     place_moves(1, 5, 9)
     assert @board.win?
+    assert @board.game_over?
   end
 
   def test_boards_can_determine_illegal_moves
@@ -77,8 +83,10 @@ class BoardTest < MiniTest::Test
 
   def test_board_knows_when_full
     refute @board.full?
+    refute @board.game_over?
     place_moves(1, 2, 3, 4, 5, 6, 7, 8, 9)
     assert @board.full?
+    assert @board.game_over?
   end
 
   def test_boards_can_test_for_a_particular_winner
@@ -87,6 +95,12 @@ class BoardTest < MiniTest::Test
     place_moves(1, 2, 3)
     assert @board.winner?(@p1)
     refute @board.winner?(p2)
+  end
+
+  def test_boards_can_be_scored
+    assert_equal @board.score(@p1), 0
+    place_moves(1,2,3)
+    assert_equal @board.score(@p1), 10
   end
 
   def test_boards_can_gen_new_state

@@ -5,6 +5,11 @@ class Board
     @wins = build_wins
   end
 
+  def initialize_clone(original)
+    super
+    @spaces = original.instance_variable_get(:@spaces).clone
+  end
+
   def legal_moves
     @spaces.select { |x| x.is_a? Fixnum }
   end
@@ -39,6 +44,12 @@ class Board
 
   def score(player)
     self.winner?(player) ? 10 : 0
+  end
+
+  def successor(space, player)
+    next_state = self.clone
+    next_state.move!(space, player)
+    next_state
   end
 
   def to_s

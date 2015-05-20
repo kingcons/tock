@@ -104,6 +104,9 @@ class BoardTest < MiniTest::Test
   end
 
   def test_boards_can_gen_new_state
-    #binding.pry
+    assert @board.legal_move?(5)
+    new_state = @board.successor(5, @p1)
+    refute new_state.legal_move?(5)
+    assert @board.legal_move?(5)
   end
 end

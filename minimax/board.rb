@@ -21,9 +21,15 @@ class Board
     @spaces.all? { |x| x.is_a? String }
   end
 
-  def winner?
+  def win?
     @wins.any? do |indexes|
       indexes.map { |x| @spaces[x] }.uniq.length == 1
+    end
+  end
+
+  def winner?(player)
+    @wins.any? do |indexes|
+      indexes.all? { |x| @spaces[x] == player.character }
     end
   end
 

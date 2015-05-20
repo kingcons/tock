@@ -11,7 +11,7 @@ class TicTacToe
   end
 
   def finished?
-    @board.full? || @board.winner?
+    @board.full? || @board.win?
   end
 
   def play
@@ -50,7 +50,7 @@ class TicTacToe
   end
 
   def game_over(player)
-    if @board.winner?
+    if @board.win?
       # We're passed the player who would've gone next. Last turn's player won.
       last_player = next_player(player)
       puts "\n#{last_player.name} wins!\n"

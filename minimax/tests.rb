@@ -46,21 +46,21 @@ class BoardTest < MiniTest::Test
   end
 
   def test_boards_recognize_row_wins
-    refute @board.winner?
+    refute @board.win?
     place_moves(1, 2, 3)
-    assert @board.winner?
+    assert @board.win?
   end
 
   def test_boards_recognize_col_wins
-    refute @board.winner?
+    refute @board.win?
     place_moves(1, 4, 7)
-    assert @board.winner?
+    assert @board.win?
   end
 
   def test_boards_recognize_diag_wins
-    refute @board.winner?
+    refute @board.win?
     place_moves(1, 5, 9)
-    assert @board.winner?
+    assert @board.win?
   end
 
   def test_boards_can_determine_illegal_moves
@@ -76,7 +76,20 @@ class BoardTest < MiniTest::Test
   end
 
   def test_board_knows_when_full
+    refute @board.full?
     place_moves(1, 2, 3, 4, 5, 6, 7, 8, 9)
     assert @board.full?
+  end
+
+  def test_boards_can_test_for_a_particular_winner
+    p2 = Human.new 'James', 'O'
+    refute @board.winner?(@p1)
+    place_moves(1, 2, 3)
+    assert @board.winner?(@p1)
+    refute @board.winner?(p2)
+  end
+
+  def test_boards_can_gen_new_state
+    #binding.pry
   end
 end

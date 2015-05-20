@@ -16,7 +16,7 @@ class Menu
   end
 
   def choose_player_type(n, chosen=nil)
-    puts "Hello, Player #{n}."
+    puts "\nHey there, Player #{n}!\n"
     message =  "Please choose one of the following options:
             '1' for a Human player,
             '2' for an easy computer,
@@ -30,6 +30,7 @@ class Menu
     else
       letter = prompt("Would you like to play 'X' or 'O'?", /^[xo]$/)
     end
+    letter.upcase!
 
     case choice
     when 1 then Human.new(name, letter)
@@ -39,7 +40,7 @@ class Menu
   end
 
   def play_again?
-    'y' == prompt("Would you like to play another game?", /^[yn]$/)
+    'y' == prompt("Would you like to play a(nother) game? (y/n)", /^[yn]$/)
   end
 
   def run

@@ -1,12 +1,38 @@
 class SuperComputer
-  attr_reader :name, :character
+  attr_reader :name, :piece
 
-  def initialize(name="CPU", character)
+  def initialize(name="Wintermute", piece)
     @name = name
-    @character = character
+    @piece = piece
+    @next_move = nil
   end
 
   def get_move(board)
-    board.legal_moves.sample
+    self.negamax(board, self)
+    @next_move
+  end
+
+  def negamax(board, player, depth=nil)
+    if board.game_over?
+      board.score(self)
+    else
+      max_score = -100
+      board.legal_moves.each do |move|
+        new_board = board.successor(move, self.opponent)
+        score = -negamax(new_board, self.opponent)
+        if score > max_score
+          max_score = score
+          @next_move = move
+        end
+      end
+      max_score
+    end
+  end
+
+  def opponent
+    next_player = self.clone
+    piece = @piece == 'X' ? 'O' : 'X'
+    next_player.instance_variable_set(:@piece, piece)
+    next_player
   end
 end

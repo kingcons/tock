@@ -32,14 +32,14 @@ class SuperComputerTest < MiniTest::Test
     assert_equal @wintermute.opponent.piece, 'X'
   end
 
-  def test_negamax_scores_a_win
+  def test_ai_scores_a_win
     moves!(@p1, 4, 6, 8)
     moves!(@wintermute, 1, 5, 9)
     assert_equal @board.score(@wintermute), 10
     assert_equal @board.score(@wintermute.opponent), -10
   end
 
-  def test_negamax_scores_a_draw
+  def test_ai_scores_a_draw
     moves!(@p1, 1, 5, 6, 7)
     moves!(@wintermute, 2, 3, 4, 8, 9)
     assert_equal @board.score(@wintermute), 0

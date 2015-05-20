@@ -2,8 +2,9 @@
 
 require './tictactoe'
 
-p1 = Human.new "Brit", "X"
-p2 = Human.new "Norma", "O"
+p1 = Human.new 'Brit', 'X'
+# p2 = Human.new 'Norma', 'O'
+p2 = SuperComputer.new 'O'
 game = TicTacToe.new(3, p1, p2)
 
 game.play

@@ -1,7 +1,7 @@
 require './board'
 require './computer'
 require './human'
-require './super_computer'
+require './supercomputer'
 
 class TicTacToe
   def initialize(size, player1, player2)
@@ -11,7 +11,7 @@ class TicTacToe
   end
 
   def finished?
-    @board.draw? || @board.winner?
+    @board.full? || @board.winner?
   end
 
   def play

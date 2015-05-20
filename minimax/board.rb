@@ -17,7 +17,7 @@ class Board
     @spaces[space - 1] = player.character
   end
 
-  def draw?
+  def full?
     @spaces.all? { |x| x.is_a? String }
   end
 

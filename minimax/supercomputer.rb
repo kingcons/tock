@@ -8,21 +8,21 @@ class SuperComputer
   end
 
   def get_move(board)
-    self.negamax(board, self)
+    self.negamax(board)
     @next_move
   end
 
-  def negamax(board, player)
+  def negamax(board)
     if board.game_over?
       board.score(self)
     else
       max_score = -100
       board.legal_moves.each do |move|
-        new_board = board.successor(move, self)
-        score = -negamax(new_board, self.opponent)
+        next_board = board.successor(move, self)
+        next_player = self.opponent
+        score = -next_player.negamax(next_board)
         if score > max_score
           max_score = score
-          # The next line breaks lookahead in the recursion. Need depth!
           @next_move = move
         end
       end

@@ -1,7 +1,7 @@
 class SuperComputer
   attr_reader :name, :piece
 
-  def initialize(name="Wintermute", piece)
+  def initialize(name, piece)
     @name = name
     @piece = piece
     @next_move = nil

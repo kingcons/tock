@@ -1,7 +1,7 @@
 class Computer
   attr_reader :name, :piece
 
-  def initialize(name="CPU", piece)
+  def initialize(name, piece)
     @name = name
     @piece = piece
   end

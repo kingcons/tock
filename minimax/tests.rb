@@ -11,9 +11,9 @@ class HumanTest < MiniTest::Test
 end
 
 class ComputerTest < MiniTest::Test
-  def test_computers_have_characters
+  def test_computers_have_pieces
     cpu = Computer.new nil, 'O'
-    assert_equal cpu.character, 'O'
+    assert_equal cpu.piece, 'O'
   end
 end
 
@@ -26,6 +26,24 @@ class SuperComputerTest < MiniTest::Test
 
   def moves!(player, *moves)
     moves.each { |x| @board.move!(x, player) }
+  end
+
+  def test_has_an_opponent
+    assert_equal @wintermute.opponent.piece, 'X'
+  end
+
+  def test_negamax_scores_a_win
+    moves!(@p1, 4, 6, 8)
+    moves!(@wintermute, 1, 5, 9)
+    assert_equal @board.score(@wintermute), 10
+    assert_equal @board.score(@wintermute.opponent), -10
+  end
+
+  def test_negamax_scores_a_draw
+    moves!(@p1, 1, 5, 6, 7)
+    moves!(@wintermute, 2, 3, 4, 8, 9)
+    assert_equal @board.score(@wintermute), 0
+    assert_equal @board.score(@wintermute.opponent), 0
   end
 end
 

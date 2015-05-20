@@ -1,9 +1,9 @@
 class Computer
-  attr_reader :name, :character
+  attr_reader :name, :piece
 
-  def initialize(name="CPU", character)
+  def initialize(name="CPU", piece)
     @name = name
-    @character = character
+    @piece = piece
   end
 
   def get_move(board)

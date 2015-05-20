@@ -19,7 +19,7 @@ class Board
   end
 
   def move!(space, player)
-    @spaces[space - 1] = player.character
+    @spaces[space - 1] = player.piece
   end
 
   def game_over?
@@ -38,12 +38,18 @@ class Board
 
   def winner?(player)
     @wins.any? do |indexes|
-      indexes.all? { |x| @spaces[x] == player.character }
+      indexes.all? { |x| @spaces[x] == player.piece }
     end
   end
 
   def score(player)
-    self.winner?(player) ? 10 : 0
+    if self.winner?(player)
+      10
+    elsif self.win?
+      -10
+    else
+      0
+    end
   end
 
   def successor(space, player)
